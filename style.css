@@ -1,0 +1,13 @@
+body{
+    background-color: rgb(158, 184, 255);
+    color: rgb(0, 0, 0);
+}
+main{
+    background-color: rgb(88, 169, 201);
+    width: 60%;
+    display: flex;
+    margin-top: 50px;
+}
+form{
+    margin: 30px;
+}
