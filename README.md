@@ -1,5 +1,4 @@
-
-Zadanie wstępne
+<h1>Zadanie wstępne</h1>
 Za pomocą jezyka php, html5, css zaprojektuj formularz rejestracyjny, który będzie służył do zapisania osób do coworkingu futurelabs.
 
 
