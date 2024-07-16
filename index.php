@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header><img src="logo.png"></header>
     <div class="container">
         <h2>Formularz Rejestracyjny do FutureLabs</h2>
         <form  method="POST">
@@ -78,7 +79,10 @@
     </div>
     <div id="info">
     <?php 
-
+    function function_alert($message) { 
+        echo "<script>alert('$message');</script>"; 
+    } 
+      
     function clean_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -103,13 +107,8 @@
     @$invoice_email = isset($_POST["invoice_email"]) ? true : false;
     @$offers = isset($_POST["offers"]) ? true : false;
 
-    if (empty($first_name) || empty($last_name) || empty($email) || empty($phone) || empty($start_date) || empty($city) || empty($street) || empty($building_number) || empty($postal_code) || empty($interests) || !$regulations || !$data_processing || !$invoice_email) {
-        echo "Proszę wypełnić wszystkie wymagane pola.";
-        exit;
-    }
-
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Nieprawidłowy format adresu email.";
+        function_alert("Nieprawidłowy format adresu email.");
         exit;
     }
 

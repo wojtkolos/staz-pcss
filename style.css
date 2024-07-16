@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
     justify-content: center;
     align-items: center;
     
@@ -53,5 +53,9 @@ button:hover {
     background: #0056b3;
 }
 #info{
+    text-align: center;
+}
+header{
+    
     text-align: center;
 }
