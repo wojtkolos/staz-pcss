@@ -1,25 +1,57 @@
-body{
-    background-color: rgb(158, 184, 255);
-    color: rgb(0, 0, 0);
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    justify-content: center;
+    align-items: center;
+    
 }
-main{
-    background-color: rgb(88, 169, 201);
+
+.container {
+    background: #4fa4c5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     width: 60%;
-    display: flex;
     margin-top: 50px;
     margin-left: 20%;
     margin-right: 20%;
 }
-form{
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
     margin: 30px;
 }
-.wymagane::after{
-    content: "*";
+
+input, textarea, button {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-input{
-    margin-top: 20px;
+
+textarea {
+    resize: vertical;
+    height: 100px;
 }
-#zatwierdz{
-    display: flex;
-    margin: auto;
+
+button {
+    background: #007BFF;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+#info{
+    text-align: center;
 }
