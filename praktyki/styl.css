@@ -1,0 +1,27 @@
+body{
+    background-color: #131925
+}
+;
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+    
+  }
+.cont{
+    display: flex;
+    justify-content: center;
+}
+label{
+    color: white;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+#sub{
+    color:white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: green;
+    border: none;
+    height: 50px;
+    width: 250px;
+}
