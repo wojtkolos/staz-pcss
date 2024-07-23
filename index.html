@@ -10,7 +10,7 @@
     <header><img src="logo.png"></header>
     <div class="container">
         <h2>Formularz Rejestracyjny do FutureLabs</h2>
-        <form  method="POST">
+        <form  method="POST" action="file.php">
             <label for="first_name">Imię*</label>
             <input type="text" id="first_name" name="first_name" required>
             
@@ -78,44 +78,7 @@
         </form>
     </div>
     <div id="info">
-    <?php 
-    function function_alert($message) { 
-        echo "<script>alert('$message');</script>"; 
-    } 
-      
-    function clean_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-
-    @$first_name = clean_input($_POST["first_name"]);
-    @$last_name = clean_input($_POST["last_name"]);
-    @$email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-    @$phone = clean_input($_POST["phone"]);
-    @$start_date = clean_input($_POST["start_date"]);
-    @$packages = isset($_POST["package"]) ? $_POST["package"] : [];
-    @$city = clean_input($_POST["city"]);
-    @$street = clean_input($_POST["street"]);
-    @$building_number = clean_input($_POST["building_number"]);
-    @$apartment_number = clean_input($_POST["apartment_number"]);
-    @$postal_code = clean_input($_POST["postal_code"]);
-    @$interests = clean_input($_POST["interests"]);
-    @$regulations = isset($_POST["regulations"]) ? true : false;
-    @$data_processing = isset($_POST["data_processing"]) ? true : false;
-    @$invoice_email = isset($_POST["invoice_email"]) ? true : false;
-    @$offers = isset($_POST["offers"]) ? true : false;
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        function_alert("Nieprawidłowy format adresu email.");
-        exit;
-    }
-
     
-    echo "Rejestracja zakończona sukcesem!";
-    
-?>
     </div>
 </body>
 </html>
