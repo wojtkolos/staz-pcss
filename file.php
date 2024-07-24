@@ -11,6 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $data;
     }
 
+    if(isset($_POST["first_name"]) && isset($_POST["last_name"])){
+    
     @$first_name = clean_input($_POST["first_name"]);
     @$last_name = clean_input($_POST["last_name"]);
     @$email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
@@ -27,14 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     @$data_processing = $_POST["data_processing"];
     @$invoice_email = $_POST["invoice_email"];
     @$offers = $_POST["offers"];
+
     if(isset($_POST['email'])){
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         function_alert("Nieprawidłowy format adresu email.");
         exit;
+    } 
     }
-}
-
-    
     echo "Rejestracja zakończona sukcesem!";
+}
 }
 ?>
