@@ -151,16 +151,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   //errors
   if (!empty($errors)) {
-    echo "<div class='error'>";
     foreach ($errors as $error) {
-      echo "<p>$error</p>";
+        echo "<h1 style='color:red;'>$error</h1>";
     }
-    echo "</div>";
   } else {
     $registration_successful = true;
     ?>
     <script>
-      alert('Dziękuję za przesłanie formularza!');
+      alert('Dziękuję za przesłanie formularzu!');
     </script>
     <?php
   }
