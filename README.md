@@ -1,0 +1,1 @@
+![Zrzut](/strona.png)
