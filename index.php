@@ -5,12 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formularz Rejestracyjny - FutureLabs</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        function validateForm() {
+            const form = document.forms["registrationForm"];
+            const requiredFields = ["first_name", "last_name", "email", "phone", "start_date", "city", "street", "building_number", "postal_code", "interests"];
+            let valid = true;
+
+            requiredFields.forEach(function(field) {
+                const input = form[field];
+                if (input.value.trim() === "") {
+                    input.style.borderColor = "red";
+                    valid = false;
+                } else {
+                    input.style.borderColor = "";
+                }
+            });
+
+            const regulations = form["regulations"];
+            const dataProcessing = form["data_processing"];
+            const invoiceEmail = form["invoice_email"];
+            if (!regulations.checked || !dataProcessing.checked || !invoiceEmail.checked) {
+                valid = false;
+            }
+
+            document.getElementById("submitBtn").disabled = !valid;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.forms["registrationForm"];
+            form.addEventListener("input", validateForm);
+            validateForm();  
+        });
+    </script>
 </head>
 <body>
-    <header><img src="logo.png"></header>
+    <header><img src="logo.png" alt="FutureLabs Logo"></header>
     <div class="container">
         <h2>Formularz Rejestracyjny do FutureLabs</h2>
-        <form  method="POST" action="file.php">
+        <form name="registrationForm" action="file.php" method="POST">
             <label for="first_name">Imię*</label>
             <input type="text" id="first_name" name="first_name" required>
             
@@ -74,11 +106,9 @@
                 Jestem zainteresowany otrzymywaniem ofert współpracy adekwatnie do wskazanych zainteresowan/kompetencji nie częściej niż raz w tygodniu
             </label>
             
-            <button type="submit" >Zarejestruj się</button>
+            <button type="submit" id="submitBtn" disabled>Zarejestruj się</button>
         </form>
     </div>
-    <div id="info">
-    
-    </div>
+    <div id="info"></div>
 </body>
 </html>
