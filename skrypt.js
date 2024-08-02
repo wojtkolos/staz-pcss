@@ -1,51 +1,51 @@
-funkcjonować sprawdź1 () {
-    zmienna imie = dokument . getElementById ( „imie” ). wartość
-    if ( imie == "" ) dokument . getElementById ( „komunikat1” ). insideHTML = "Podaj imię"
-    w przeciwnym razie dokument . getElementById ( „komunikat1” ). wewnętrznyHTML = "" ;
- }
- funkcjonować sprawdz2 () {
-    zmienna nazwisko = dokument . getElementById ( "nazwisko" ). wartość
-    if ( nazwisko == "" ) dokument . getElementById ( „komunikat2” ). internalHTML = "Podaj nazwisko"
-    w przeciwnym razie dokument . getElementById ( „komunikat2” ). wewnętrznyHTML = "" ;
- }
- funkcjonować sprawdź3 () {
-    zmienna email = dokument .getElementById ( " email" ). wartość
-    jeśli ( email == "" ) document .getElementById ( " komunikat3 " ).innerHTML = " Podaj email"
-    w przeciwnym razie dokument . getElementById ( „komunikat3” ). wewnętrznyHTML = "" ;
- }
- funkcjonować sprawdź4 () {
-    zmienna telefon = dokument . getElementById ( „telefonu” ). wartość
-    if ( telefon == "" ) dokument . getElementById ( „komunikat4” ). insideHTML = "Podaj telefon"
-    w przeciwnym razie dokument . getElementById ( „komunikat4” ). wewnętrznyHTML = "" ;
- }
- funkcjonować sprawdz5 () {
-    zmienna dane = dokument .getElementById ( " dane" ). wartość
-    if ( data == "dd.mm.rrrr" ) dokument . getElementById ( „komunikat5” ). insideHTML = "Podaj datę"
-    w przeciwnym razie dokument . getElementById ( „komunikat5” ). wewnętrznyHTML = "" ;
- }
+function sprawdz1() {
+    var imie=document.getElementById("imie").value
+    if (imie=="") document.getElementById("komunikat1").innerHTML="Podaj imię"
+    else document.getElementById("komunikat1").innerHTML="";
+}
+function sprawdz2() {
+    var nazwisko=document.getElementById("nazwisko").value
+    if (nazwisko=="") document.getElementById("komunikat2").innerHTML="Podaj nazwisko"
+    else document.getElementById("komunikat2").innerHTML="";
+}
+function sprawdz3() {
+    var email=document.getElementById("email").value
+    if (email=="") document.getElementById("komunikat3").innerHTML="Podaj email"
+    else document.getElementById("komunikat3").innerHTML="";
+}
+function sprawdz4() {
+    var telefonu=document.getElementById("telefonu").value
+    if (telefonu=="") document.getElementById("komunikat4").innerHTML="Podaj telefonu"
+    else document.getElementById("komunikat4").innerHTML="";
+}
+function sprawdz5() {
+    var data=document.getElementById("data").value
+    if (data=="dd.mm.rrrr") document.getElementById("komunikat5").innerHTML="Podaj date"
+    else document.getElementById("komunikat5").innerHTML="";
+}
 
 
 
 
 
- funkcjonować sprawdźALL () {
-    zmienna imie = dokument . getElementById ( „imie” ). wartość
-    if ( imie == "" ) dokument . getElementById ( „komunikat1” ). insideHTML = "Podaj imię"
-    w przeciwnym razie dokument . getElementById ( „komunikat1” ). wewnętrznyHTML = "" ;
+function sprawdzALL() {
+    var imie=document.getElementById("imie").value
+    if (imie=="") document.getElementById("komunikat1").innerHTML="Podaj imię"
+    else document.getElementById("komunikat1").innerHTML="";
    
-    zmienna nazwisko = dokument . getElementById ( "nazwisko" ). wartość
-    if ( nazwisko == "" ) dokument . getElementById ( „komunikat2” ). internalHTML = "Podaj nazwisko"
-    w przeciwnym razie dokument . getElementById ( „komunikat2” ). wewnętrznyHTML = "" ;
+    var nazwisko=document.getElementById("nazwisko").value
+    if (nazwisko=="") document.getElementById("komunikat2").innerHTML="Podaj nazwisko"
+    else document.getElementById("komunikat2").innerHTML="";
    
-    zmienna email = dokument .getElementById ( " email" ). wartość
-    jeśli ( email == "" ) document .getElementById ( " komunikat3 " ).innerHTML = " Podaj email"
-    w przeciwnym razie dokument . getElementById ( „komunikat3” ). wewnętrznyHTML = "" ;
+    var email=document.getElementById("email").value
+    if (email=="") document.getElementById("komunikat3").innerHTML="Podaj email"
+    else document.getElementById("komunikat3").innerHTML="";
 
-    zmienna telefon = dokument . getElementById ( „telefonu” ). wartość
-    if ( telefon == "" ) dokument . getElementById ( „komunikat4” ). insideHTML = "Podaj telefon"
-    w przeciwnym razie dokument . getElementById ( „komunikat4” ). wewnętrznyHTML = "" ;
-    zmienna dane = dokument .getElementById ( " dane" ). wartość
-    if ( data == "" ) dokument . getElementById ( „komunikat5” ). insideHTML = "Podaj datę"
-    w przeciwnym razie dokument . getElementById ( „komunikat5” ). wewnętrznyHTML = "" ;
+    var telefonu=document.getElementById("telefonu").value
+    if (telefonu=="") document.getElementById("komunikat4").innerHTML="Podaj telefonu"
+    else document.getElementById("komunikat4").innerHTML="";
+    var data=document.getElementById("data").value
+    if (data=="") document.getElementById("komunikat5").innerHTML="Podaj date"
+    else document.getElementById("komunikat5").innerHTML="";
 
- }
+}
