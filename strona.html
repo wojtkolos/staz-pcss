@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zgłoszenie</title>
+    <link rel="stylesheet" href="css.css">
+    <script src="skrypt.js"></script>
+</head>
+<body>
+    <div id="container">
+        <form id="dane">
+            <label for="imie">Imię</label>
+            <span id="komunikat1"></span>
+            <input name="imie" id="imie" placeholder="Wprowadź imię" type="text" oninput="sprawdz1()">
+            
+            
+            
+            
+            
+            <label for="nazwisko">Nazwisko</label>
+            <span id="komunikat2"></span>
+            <input name="nazwisko" id="nazwisko" placeholder="Wprowadź nazwisko" type="text" oninput="sprawdz2()">
+            
+
+            <label for="e-mail">Adres e-mail</label>
+            <span id="komunikat3"></span>
+            <input type="email" id="email" name="e-mail" placeholder="np. example@ex.com" oninput="sprawdz3()">
+            
+
+            <label for="telefonu">Numer telefonu</label>
+            <span id="komunikat4"></span>
+            <input type="tel" name="telefonu" id="telefonu" placeholder="np. 964367387">
+            
+
+            <label for="data">Planowany dzień rozpoczęcia korzystania z przestrzeni</label>
+            <span id="komunikat5"></span>
+            <input type="date" name="data" id="data">
+            
+
+            <label>Wybierz pakiet:</label>
+            <input type="radio" name="OWNER" id="coworker" value="coworker">
+            <label for="coworker">COWORKER (50zł)</label>
+
+            <input type="radio" name="OWNER" id="OWNER" value="OWNER">
+            <label for="OWNER">OWNER (400zł)</label>
+            
+            <label for="miejscowość">Adres korespondencyjny - Miejscowość</label>
+            <input type="text" name="miejscowość" placeholder="Wprowadź miejscowość korespondencyjną">
+
+            <label for="Ulica">Adres korespondencyjny - Ulica</label>
+            <input type="text" name="Ulica" placeholder="Wprowadź ulicę">
+
+            <label for="numer">Adres korespondencyjny - Numer mieszkania</label>
+            <input type="text" name="numer" placeholder="Wprowadź numer mieszkania">
+
+            <label for="kod">Adres korespondencyjny - kod pocztowy</label>
+            <input type="text" name="kod" placeholder="Wprowadź kod pocztowy">
+
+            <label for="poczta">Adres korespondencyjny - Poczta</label>
+            <input type="text" name="poczta" placeholder="Wprowadź pocztę">
+
+            <label for="zainteresowania">Moje zainteresowania/kompetencje</label>
+            <textarea name="zainteresowania" id="zainteresowania"></textarea>
+
+            <input type="checkbox" name="faktura" id="faktura">
+            <label for="faktura">Proszę o wystawienie faktury VAT</label>
+
+            <h3>Zapoznanie z Regulaminem</h3>
+            <input type="checkbox" name="Regulamin" id="regulamin">
+            <label for="regulamin">Oświadczam, że zapoznałem/am się z Regulaminem i zobowiązuję się do jego przestrzegania.</label>
+
+            <h3>Zgoda na przetwarzanie i przechowywanie danych osobowych</h3>
+            <input type="checkbox" name="zgoda" id="zgoda">
+            <label for="zgoda">Wyrażam zgodę na przetwarzanie moich danych osobowych przez ICHB PAN PCSS.</label>
+
+            <h3>Zgoda na przesyłanie faktur/rachunków drogą elektroniczną</h3>
+            <input type="checkbox" name="EZgoda" id="EZgoda">
+            <label for="EZgoda">Wyrażam zgodę na przesyłanie faktur drogą elektroniczną.</label>
+
+            <input type="button" value="WYŚLIJ" onclick="sprawdzALL()">
+        </form>
+    </div>
+</body>
+</html>
