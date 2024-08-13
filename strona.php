@@ -160,7 +160,7 @@ if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefo
             $dane = trim($dane);
             return $dane;
         }
-            function oczysc_mail($dane) {
+        function oczysc_mail($dane) {
                 $dane = preg_replace('/[^a-zA-Z0-9@_-]/', '', $dane);
                 $dane = trim($dane);
                 return $dane;
@@ -188,7 +188,7 @@ if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefo
            
 
     $stmt = $polaczenie->prepare("INSERT INTO dane (imie, nazwisko, email, numer_telefonu, rok, miejscowosc, ulica, budynek, mieszkanie, kod, zainteresowania, regulamin, zgoda, zgoda_faktury, zgoda_oferty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssssssssii", $imie, $nazwisko, $email, $numer_telefonu, $rok, $miejscowosc, $ulica, $budynek, $mieszkanie, $kod, $zainteresowania, $regulamin, $zgoda, $zgoda_faktury, $zgoda_oferty);
+    $stmt->bind_param("sssssssssssiiii", $imie, $nazwisko, $email, $numer_telefonu, $rok, $miejscowosc, $ulica, $budynek, $mieszkanie, $kod, $zainteresowania, $regulamin, $zgoda, $zgoda_faktury, $zgoda_oferty);
     
     if ($stmt->execute()) {
         echo "Nowy rekord został pomyślnie dodany<br>";
