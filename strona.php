@@ -42,11 +42,14 @@
            
             <label>Wybierz pakiet:</label>
             <span id="komunikat_pakiet"></span>
-            <label for="coworker">COWORKER (50zł)</label>
-            <input type="radio" name="pakiet" id="coworker" value="coworker">
-           
-            <label for="owner">OWNER (400zł)</label>
-            <input type="radio" name="pakiet" id="owner" value="owner">
+            <div class="radio-group">
+            <label for="coworker">
+            <input type="radio" name="pakiet" id="coworker" value="coworker">COWORKER (50zł)
+            </label>
+            <label for="owner">
+            <input type="radio" name="pakiet" id="owner" value="owner">OWNER (400zł)
+            </label>
+            </div>
            
             <label for="miejscowosc">Adres korespondencyjny - Miejscowość</label>
             <span id="komunikat_miejscowosc"></span>
