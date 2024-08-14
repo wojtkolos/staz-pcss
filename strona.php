@@ -153,22 +153,28 @@ if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefo
     }
 
 
-        function oczysc_alfabet($dane) {
-            $dane = preg_replace('/[^a-zA-Z]/', '', $dane);
-            $dane = trim($dane);
-            return $dane;
-        }
-        function oczysc_numery($dane) {
-            $dane = preg_replace('/[^0-9-.]/', '', $dane);
-            $dane = trim($dane);
-            return $dane;
-        }
-        function oczysc_mail($dane) {
-                $dane = preg_replace('/[^a-zA-Z0-9@_-]/', '', $dane);
-                $dane = trim($dane);
-                return $dane;
-            }
-        }
+    function oczysc_dane($dane, $patern) {
+        return trim(preg_replace($patern, '', $dane));
+    }
+    
+    function oczysc_alfabet($dane) {
+        return oczysc_dane($dane, '/[^a-zA-ZąęśćżźĄĘŚĆŻŹ]/');
+    }
+    
+    function oczysc_numery($dane) {
+        return oczysc_dane($dane, '/[^0-9-.]/');
+    }
+    
+    function oczysc_mail($dane) {
+        return oczysc_dane($dane, '/[^a-zA-Z0-9@_-]/');
+    }
+
+    function oczysc_adresy($dane) {
+        return oczysc_dane($dane, '/[^a-zA-Z0-9_-]/');
+    }
+}
+            
+        
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $imie = oczysc_alfabet($_POST['imie']);
@@ -177,10 +183,10 @@ if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefo
             $numer_telefonu=oczysc_numery($_POST['numer_telefonu']);
             $rok = oczysc_numery($_POST['rok']);
             $miejscowosc=oczysc_alfabet($_POST['miejscowosc']);
-            $ulica=oczysc_mail($_POST['ulica']);
-            $budynek=oczysc_mail($_POST['budynek']);
-            $mieszkanie=oczysc_mail($_POST['mieszkanie']);
-            $kod=oczysc_numery($_POST['kod']);
+            $ulica=oczysc_adresy($_POST['ulica']);
+            $budynek=oczysc_adresy($_POST['budynek']);
+            $mieszkanie=oczysc_adresy($_POST['mieszkanie']);
+            $kod=oczysc_adresy($_POST['kod']);
             $zainteresowania =oczysc_alfabet($_POST['zainteresowania']);
             $regulamin = isset($_POST['regulamin']) ? 1 : 0;
             $zgoda = isset($_POST['zgoda']) ? 1 : 0;
