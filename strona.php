@@ -33,7 +33,7 @@
                     const yyyy = today.getFullYear();
                     const mm = String(today.getMonth() + 1).padStart(2, '0');
                     const dd = String(today.getDate()).padStart(2, '0');
-                    const todayString = ${yyyy}-${mm}-${dd};
+                    const todayString = `${yyyy}-${mm}-${dd}`;
                     document.getElementById("rok").setAttribute("min", todayString);
                 }  
                 window.onload = setMinDate;
@@ -44,10 +44,10 @@
             <span id="komunikat_pakiet"></span>
             <div class="radio-group">
             <label for="coworker">
-            <input type="radio" name="pakiet" id="coworker" value="coworker">COWORKER (50zł)
+                <input type="radio" name="pakiet" id="coworker" value="COWORKER" required>COWORKER (50zł)
             </label>
             <label for="owner">
-            <input type="radio" name="pakiet" id="owner" value="owner">OWNER (400zł)
+                <input type="radio" name="pakiet" id="owner" value="OWNER">OWNER (400zł)
             </label>
             </div>
            
@@ -116,26 +116,23 @@ function oczysc_mail($dane) {
 function oczysc_adresy($dane) {
     return oczysc_dane($dane, '/[^a-zA-Z0-9_-]/');
 }
-if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefonu"],$_POST["rok"])) {
-       
+if (isset($_POST["imie"], $_POST["nazwisko"], $_POST["email"], $_POST["numer_telefonu"], $_POST["rok"])) {
+    
+    
     $serwer = "localhost";
     $uzytkownik = "root";
     $haslo = "";
     $nazwa_bazy = "kamien";
-   
-
+    
     $polaczenie = new mysqli($serwer, $uzytkownik, $haslo);
-   
-
+    
     if ($polaczenie->connect_error) {
         die("Błąd połączenia: " . $polaczenie->connect_error);
     }
-   
-
+    
     $baza_istnieje = $polaczenie->query("SHOW DATABASES LIKE '$nazwa_bazy'");
-   
+    
     if ($baza_istnieje->num_rows == 0) {
-
         $sql = "CREATE DATABASE $nazwa_bazy";
         if ($polaczenie->query($sql) === TRUE) {
             echo "Baza danych została pomyślnie utworzona<br>";
@@ -145,10 +142,9 @@ if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefo
     } else {
         echo "Baza danych już istnieje<br>";
     }
-   
-
+    
     $polaczenie->select_db($nazwa_bazy);
-
+    
     $tabela = "CREATE TABLE IF NOT EXISTS dane (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         imie VARCHAR(50) NOT NULL,
@@ -162,47 +158,43 @@ if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefo
         mieszkanie VARCHAR(100),
         kod VARCHAR(6) NOT NULL,
         zainteresowania TEXT NOT NULL,
+        
         zgoda_faktury VARCHAR(3) NOT NULL,
-        zgoda_oferty VARCHAR(3) NOT NULL
+        zgoda_oferty VARCHAR(3) NOT NULL,
+        pakiet VARCHAR(20) NOT NULL
     )";
+    
     if ($polaczenie->query($tabela) === FALSE) {
         die("Błąd podczas tworzenia tabeli: " . $polaczenie->error);
     }
-
-
     
-}
-            
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $imie = oczysc_alfabet($_POST['imie']);
+        $nazwisko = oczysc_alfabet($_POST['nazwisko']);
+        $email = oczysc_mail($_POST['email']);
+        $numer_telefonu = oczysc_numery($_POST['numer_telefonu']);
+        $rok = oczysc_numery($_POST['rok']);
+        $miejscowosc = oczysc_alfabet($_POST['miejscowosc']);
+        $ulica = oczysc_adresy($_POST['ulica']);
+        $budynek = oczysc_adresy($_POST['budynek']);
+        $mieszkanie = oczysc_adresy($_POST['mieszkanie']);
+        $kod = oczysc_adresy($_POST['kod']);
+        $zainteresowania = oczysc_alfabet($_POST['zainteresowania']);
+        $pakiet = oczysc_dane($_POST['pakiet'], '/[^a-zA-Z0-9]/');
+        $zgoda_faktury = isset($_POST['zgoda_faktury']) ? "TAK" : "NIE";
+        $zgoda_oferty = isset($_POST['zgoda_oferty']) ? "TAK" : "NIE";
         
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $imie = oczysc_alfabet($_POST['imie']);
-            $nazwisko = oczysc_alfabet($_POST['nazwisko']);
-            $email= oczysc_mail($_POST['email']);
-            $numer_telefonu=oczysc_numery($_POST['numer_telefonu']);
-            $rok = oczysc_numery($_POST['rok']);
-            $miejscowosc=oczysc_alfabet($_POST['miejscowosc']);
-            $ulica=oczysc_adresy($_POST['ulica']);
-            $budynek=oczysc_adresy($_POST['budynek']);
-            $mieszkanie=oczysc_adresy($_POST['mieszkanie']);
-            $kod=oczysc_adresy($_POST['kod']);
-            $zainteresowania =oczysc_alfabet($_POST['zainteresowania']);
-            $zgoda_faktury = isset($_POST['zgoda_faktury']) ? "TAK" : "NIE";
-            $zgoda_oferty = isset($_POST['zgoda_oferty']) ? "TAK" : "NIE";
-            
-           
-           
-
-    $stmt = $polaczenie->prepare("INSERT INTO dane (imie, nazwisko, email, numer_telefonu, rok, miejscowosc, ulica, budynek, mieszkanie, kod, zainteresowania, zgoda_faktury, zgoda_oferty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssssssss", $imie, $nazwisko, $email, $numer_telefonu, $rok, $miejscowosc, $ulica, $budynek, $mieszkanie, $kod, $zainteresowania, $zgoda_faktury, $zgoda_oferty);
-    
-    if ($stmt->execute()) {
-        echo "Nowy rekord został pomyślnie dodany<br>";
-    } else {
-        echo "Błąd: " . $stmt->error;
+        $stmt = $polaczenie->prepare("INSERT INTO dane (imie, nazwisko, email, numer_telefonu, rok, miejscowosc, ulica, budynek, mieszkanie, kod, zainteresowania, zgoda_faktury, zgoda_oferty, pakiet) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssssssssss", $imie, $nazwisko, $email, $numer_telefonu, $rok, $miejscowosc, $ulica, $budynek, $mieszkanie, $kod, $zainteresowania, $zgoda_faktury, $zgoda_oferty, $pakiet);
+        
+        if ($stmt->execute()) {
+            echo "Nowy rekord został pomyślnie dodany<br>";
+        } else {
+            echo "Błąd: " . $stmt->error;
+        }
+        
+        $stmt->close();
+        $polaczenie->close();
     }
-
-    $stmt->close();
-    $polaczenie->close();
 }
 ?>
