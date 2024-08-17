@@ -33,7 +33,7 @@
                     const yyyy = today.getFullYear();
                     const mm = String(today.getMonth() + 1).padStart(2, '0');
                     const dd = String(today.getDate()).padStart(2, '0');
-                    const todayString = `${yyyy}-${mm}-${dd}`;
+                    const todayString = ${yyyy}-${mm}-${dd};
                     document.getElementById("rok").setAttribute("min", todayString);
                 }  
                 window.onload = setMinDate;
@@ -97,6 +97,25 @@
 </body>
 </html>
 <?php
+function oczysc_dane($dane, $patern) {
+    return trim(preg_replace($patern, '', $dane));
+}
+
+function oczysc_alfabet($dane) {
+    return oczysc_dane($dane, '/[^a-zA-ZąęśćżźĄĘŚĆŻŹ]/');
+}
+
+function oczysc_numery($dane) {
+    return oczysc_dane($dane, '/[^0-9-.]/');
+}
+
+function oczysc_mail($dane) {
+    return oczysc_dane($dane, '/[^a-zA-Z0-9@_-]/');
+}
+
+function oczysc_adresy($dane) {
+    return oczysc_dane($dane, '/[^a-zA-Z0-9_-]/');
+}
 if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefonu"],$_POST["rok"])) {
        
     $serwer = "localhost";
@@ -143,35 +162,15 @@ if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefo
         mieszkanie VARCHAR(100),
         kod VARCHAR(6) NOT NULL,
         zainteresowania TEXT NOT NULL,
-        regulamin TINYINT(1) NOT NULL,
-        zgoda TINYINT(1) NOT NULL,
-        zgoda_faktury TINYINT(1) NOT NULL,
-        zgoda_oferty TINYINT(1) NOT NULL
+        zgoda_faktury VARCHAR(3) NOT NULL,
+        zgoda_oferty VARCHAR(3) NOT NULL
     )";
     if ($polaczenie->query($tabela) === FALSE) {
         die("Błąd podczas tworzenia tabeli: " . $polaczenie->error);
     }
 
 
-    function oczysc_dane($dane, $patern) {
-        return trim(preg_replace($patern, '', $dane));
-    }
     
-    function oczysc_alfabet($dane) {
-        return oczysc_dane($dane, '/[^a-zA-ZąęśćżźĄĘŚĆŻŹ]/');
-    }
-    
-    function oczysc_numery($dane) {
-        return oczysc_dane($dane, '/[^0-9-.]/');
-    }
-    
-    function oczysc_mail($dane) {
-        return oczysc_dane($dane, '/[^a-zA-Z0-9@_-]/');
-    }
-
-    function oczysc_adresy($dane) {
-        return oczysc_dane($dane, '/[^a-zA-Z0-9_-]/');
-    }
 }
             
         
@@ -188,16 +187,14 @@ if (isset($_POST["imie"],$_POST["nazwisko"],$_POST["email"],$_POST["numer_telefo
             $mieszkanie=oczysc_adresy($_POST['mieszkanie']);
             $kod=oczysc_adresy($_POST['kod']);
             $zainteresowania =oczysc_alfabet($_POST['zainteresowania']);
-            $regulamin = isset($_POST['regulamin']) ? 1 : 0;
-            $zgoda = isset($_POST['zgoda']) ? 1 : 0;
-            $zgoda_faktury = isset($_POST['zgoda_faktury']) ? 1 : 0;
-            $zgoda_oferty = isset($_POST['zgoda_oferty']) ? 1 : 0;
-        
+            $zgoda_faktury = isset($_POST['zgoda_faktury']) ? "TAK" : "NIE";
+            $zgoda_oferty = isset($_POST['zgoda_oferty']) ? "TAK" : "NIE";
+            
            
            
 
-    $stmt = $polaczenie->prepare("INSERT INTO dane (imie, nazwisko, email, numer_telefonu, rok, miejscowosc, ulica, budynek, mieszkanie, kod, zainteresowania, regulamin, zgoda, zgoda_faktury, zgoda_oferty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssssssiiii", $imie, $nazwisko, $email, $numer_telefonu, $rok, $miejscowosc, $ulica, $budynek, $mieszkanie, $kod, $zainteresowania, $regulamin, $zgoda, $zgoda_faktury, $zgoda_oferty);
+    $stmt = $polaczenie->prepare("INSERT INTO dane (imie, nazwisko, email, numer_telefonu, rok, miejscowosc, ulica, budynek, mieszkanie, kod, zainteresowania, zgoda_faktury, zgoda_oferty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssssssss", $imie, $nazwisko, $email, $numer_telefonu, $rok, $miejscowosc, $ulica, $budynek, $mieszkanie, $kod, $zainteresowania, $zgoda_faktury, $zgoda_oferty);
     
     if ($stmt->execute()) {
         echo "Nowy rekord został pomyślnie dodany<br>";
